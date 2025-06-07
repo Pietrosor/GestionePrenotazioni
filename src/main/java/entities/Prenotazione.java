@@ -2,16 +2,11 @@ package entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Entity
-@Table(name="prenotazioni")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Table(name="prenotazioni", uniqueConstraints = @UniqueConstraint(columnNames = {"utente_id", "postazione_id", "data"}))
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class Prenotazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +21,4 @@ public class Prenotazione {
     @ManyToOne
     @JoinColumn(name = "postazione_id")
     private Postazione postazione;
-
 }

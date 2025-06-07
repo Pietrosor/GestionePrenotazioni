@@ -4,24 +4,25 @@ import enumeration.TipoPostazione;
 import jakarta.persistence.*;
 import lombok.*;
 
-    @Entity
-    @Table(name="postazioni")
-    @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
+@Entity
+@Table(name="postazioni")
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class Postazione {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        private String codiceUnivoco;
-        private String descvrizione;
+    @Column(unique = true)
+    private String codiceUnivoco;
 
-        @Enumerated(EnumType.STRING)
-        private TipoPostazione tipo;
+    private String descrizione;
 
-        private int maxOccupanti;
+    @Enumerated(EnumType.STRING)
+    private TipoPostazione tipo;
 
-        @ManyToOne
-        @JoinColumn(name="edificio_id")
-        private Edificio edificio;
+    private int maxOccupanti;
 
+    @ManyToOne
+    @JoinColumn(name="edificio_id")
+    private Edificio edificio;
 }
